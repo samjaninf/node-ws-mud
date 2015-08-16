@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+      .cssanimations.csstransforms #notes {
+          -webkit-transform: translateY(-50px);
+          -webkit-animation: slideDown 2.5s 1.0s 1 ease forwards;
+          -moz-transform:    translateY(-50px);
+          -moz-animation:    slideDown 2.5s 1.0s 1 ease forwards;
+      }
+      #notes {
+        position: absolute;
+        z-index: 101 !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #fde073;
+        text-align: center;
+        line-height: 2.5;
+        display: none;
+        -webkit-box-shadow: 0 0 5px black;
+        -moz-box-shadow:    0 0 5px black;
+        box-shadow:         0 0 5px black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="notes" class="notifications">
+      Sweaty socks <a id="close">[close]</a>
+    </div>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $('a[id=close]').click(function (e) {
+        // console.log(e);
+        $('#notes').click(function () {
+          $(this).slideUp();
+        });
+      });
+      var socket = io();
+      $('form').submit(function(){
+        socket.emit('com', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+      socket.on('com', function (msg) {
+        $('#messages').append($('<li>').text(msg));
+      });
+      socket.on('join', function (msg) {
+        $('#notes').empty();
+        // $('#notes').style.visibility('visible');
+        $('#notes').append($('<li>').text(msg.user + ' has joined the channel.')).slideDown();
+        $('#notes').slideDown('fast');
+        $('#notes').delay(1000).slideUp();
+      });
+    </script>
+  </body>
+</html>

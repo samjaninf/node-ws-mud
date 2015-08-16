@@ -1,0 +1,36 @@
+html, body {
+  /*background-color: #000;*/
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: Arial;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.main_body {
+  font-family: monaco, "Courier New", Courier, monospace;
+  line-height: 1;
+  width: calc(100% - 10px);
+  height: calc(100% - 50px);
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: black;
+}
+
+.main_input {
+  left: 10px;
+  position: absolute;
+  bottom:0;
+  width: calc(100% - 75px);
+  height: 25px;
+  resize: none;
+  padding: 0;
+  margin: 0;
+}

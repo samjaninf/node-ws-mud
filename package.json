@@ -1,0 +1,12 @@
+{
+  "name": "socket-chat-app",
+  "version": "0.0.1",
+  "description": "Loosely made socket chat app.",
+  "author": "Richard Rattary",
+  "dependencies": {
+    "express": "^4.10.2",
+    "jade": "^1.11.0",
+    "preach": "^0.3.0",
+    "socket.io": "^1.3.6"
+  }
+}
